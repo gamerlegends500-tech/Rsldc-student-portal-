@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSLDC Student Portal</title>
+<style>
+:root{--navy:#17345d;--blue:#2457a7;--bg:#f3f6fb;--ink:#17243a;--muted:#68758b;--line:#dfe6f0;--white:#fff;--green:#16835f;--red:#b84343}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Devanagari",Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#17345d,#2b62b2);color:white;padding:22px max(18px,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.logo{height:48px;width:48px;border-radius:14px;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:17px}.brand h1{margin:0;font-size:clamp(19px,3vw,27px)}.brand p{margin:4px 0 0;opacity:.85;font-size:13px}
+button,select,input{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:11px 15px;font-weight:650}.lang{background:#fff;color:var(--navy)}.primary{background:var(--blue);color:#fff}.secondary{background:#eaf0fa;color:var(--navy)}.danger{background:#fff0f0;color:var(--red)}
+main{max-width:1120px;margin:26px auto;padding:0 18px 40px}.notice{background:#fff7df;border:1px solid #f0d88e;border-radius:12px;padding:13px 15px;color:#624b0b;font-size:13px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 4px 18px #1b37600a}.span8{grid-column:span 8}.span4{grid-column:span 4}.span12{grid-column:span 12}
+h2{font-size:19px;margin:0 0 16px}.muted{color:var(--muted);font-size:13px}.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:650;color:#43516a}.field input,.field select{width:100%;border:1px solid #cfd8e6;border-radius:10px;padding:11px 12px;background:white;color:var(--ink)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f5f8fd;border-radius:12px;padding:14px}.stat strong{display:block;font-size:25px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}
+.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#e8f7f0;color:var(--green);font-size:12px;font-weight:700}.pill.out{background:#fff1e4;color:#98531d}.profile{display:flex;align-items:center;gap:13px}.avatar{height:54px;width:54px;border-radius:50%;display:grid;place-items:center;background:#e3edff;color:#214f98;font-size:20px;font-weight:800;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.profile h3{margin:0 0 4px;font-size:17px}.profile p{margin:0;color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line)}th{color:#58657a;font-weight:700;background:#f8faff}td{vertical-align:top}.tablewrap{overflow-x:auto}
+.hidden{display:none!important}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{background:#e8edf6;color:#44536b}.tab.active{background:var(--navy);color:white}.status{padding:12px;border-radius:10px;background:#f2f7ff;margin:12px 0;font-size:14px}
+footer{text-align:center;padding:20px;color:#7a879b;font-size:12px}
+@media(max-width:760px){.span8,.span4{grid-column:span 12}.statrow{grid-template-columns:1fr 1fr 1fr}.card{padding:16px}header{padding:18px}.brand h1{font-size:20px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">RS</div><div><h1>RSLDC STUDENT PORTAL</h1><p data-en="Student attendance and hostel records" data-hi="स्टूडेंट हाजिरी और हॉस्टल रिकॉर्ड">Student attendance and hostel records</p></div></div>
+  <button class="lang" id="langBtn">हिंदी</button>
+</header>
+<main>
+  <div class="notice" data-en="Prototype only: records are saved in this browser on this device. This is not a secure live portal yet. Do not enter real sensitive information. A real deployment needs a server, database, secure authentication and institute approval." data-hi="यह केवल शुरुआती डेमो है: रिकॉर्ड इसी डिवाइस के इसी ब्राउज़र में सेव होंगे। यह अभी सुरक्षित लाइव पोर्टल नहीं है। असली निजी जानकारी न डालें। वास्तविक पोर्टल के लिए सर्वर, डेटाबेस, सुरक्षित लॉगिन और संस्थान की अनुमति चाहिए।">Prototype only: records are saved in this browser on this device. This is not a secure live portal yet. Do not enter real sensitive information. A real deployment needs a server, database, secure authentication and institute approval.</div>
+  <div class="tabs">
+    <button class="tab active" data-tab="student" data-en="Student portal" data-hi="स्टूडेंट पोर्टल">Student portal</button>
+    <button class="tab" data-tab="admin" data-en="Admin view" data-hi="एडमिन व्यू">Admin view</button>
+  </div>
+  <section id="student" class="grid">
+    <div class="card span8">
+      <h2 data-en="Student sign in" data-hi="स्टूडेंट लॉगिन">Student sign in</h2>
+      <p class="muted" data-en="Demo access: enter any student ID and name. Real login will be added with secure authentication." data-hi="डेमो: कोई भी स्टूडेंट ID और नाम लिखें। वास्तविक लॉगिन सुरक्षित प्रमाणीकरण के साथ जोड़ा जाएगा।">Demo access: enter any student ID and name. Real login will be added with secure authentication.</p>
+      <div class="field"><label for="studentId" data-en="Student ID" data-hi="स्टूडेंट आईडी">Student ID</label><input id="studentId" placeholder="e.g. RSLDC001" autocomplete="off"></div>
+      <div class="field"><label for="studentName" data-en="Student name" data-hi="स्टूडेंट का नाम">Student name</label><input id="studentName" placeholder="Enter your name" autocomplete="name"></div>
+      <div class="actions"><button class="primary" id="signIn" data-en="Open my portal" data-hi="मेरा पोर्टल खोलें">Open my portal</button><button class="secondary" id="signOut" data-en="Sign out" data-hi="लॉगआउट">Sign out</button></div>
+      <div id="studentArea" class="hidden">
+        <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+        <div class="profile"><div class="avatar" id="avatar">S</div><div><h3 id="welcomeName">Student</h3><p><span data-en="Student ID: " data-hi="स्टूडेंट आईडी: ">Student ID: </span><span id="welcomeId"></span></p></div></div>
+        <div class="status" id="todayStatus">No attendance recorded today.</div>
+        <div class="actions"><button class="primary" id="checkIn" data-en="Mark check in" data-hi="आने की हाजिरी लगाएँ">Mark check in</button><button class="secondary" id="checkOut" data-en="Mark check out" data-hi="जाने की हाजिरी लगाएँ">Mark check out</button></div>
+        <div class="actions"><button class="secondary" id="getLocation" data-en="Get current location" data-hi="वर्तमान लोकेशन लें">Get current location</button></div>
+        <div class="status" id="locationStatus">Location has not been checked yet.</div>
+        <div class="field"><label for="photo" data-en="Profile photo (demo only)" data-hi="प्रोफाइल फोटो (केवल डेमो)">Profile photo (demo only)</label><input type="file" id="photo" accept="image/*"><span class="muted" data-en="Photo stays in this browser only." data-hi="फोटो केवल इसी ब्राउज़र में रहेगी।">Photo stays in this browser only.</span></div>
+      </div>
+    </div>
+    <div class="card span4">
+      <h2 data-en="Today's overview" data-hi="आज का विवरण">Today's overview</h2>
+      <div class="statrow"><div class="stat"><strong id="myDays">0</strong><span data-en="My entries" data-hi="मेरी एंट्री">My entries</span></div><div class="stat"><strong id="myIn">--</strong><span data-en="Check in" data-hi="आने का समय">Check in</span></div><div class="stat"><strong id="myOut">--</strong><span data-en="Check out" data-hi="जाने का समय">Check out</span></div></div>
+      <p class="muted" style="margin-top:16px" data-en="Use the same ID each time to see your demo records." data-hi="डेमो रिकॉर्ड देखने के लिए हर बार वही आईडी इस्तेमाल करें।">Use the same ID each time to see your demo records.</p>
+    </div>
+    <div class="card span12"><h2 data-en="My recent attendance" data-hi="मेरी हाल की हाजिरी">My recent attendance</h2><div class="tablewrap"><table><thead><tr><th data-en="Date" data-hi="तारीख">Date</th><th data-en="Check in" data-hi="आने का समय">Check in</th><th data-en="Check out" data-hi="जाने का समय">Check out</th><th data-en="Status" data-hi="स्थिति">Status</th></tr></thead><tbody id="myRecords"><tr><td colspan="4" class="muted">Sign in to view records.</td></tr></tbody></table></div></div>
+  </section>
+  <section id="admin" class="grid hidden">
+    <div class="card span12">
+      <h2 data-en="Admin overview (demo)" data-hi="एडमिन विवरण (डेमो)">Admin overview (demo)</h2>
+      <p class="muted" data-en="This demo admin view has no password protection. Add secure admin authentication before real use." data-hi="इस डेमो एडमिन व्यू पर पासवर्ड सुरक्षा नहीं है। असली उपयोग से पहले सुरक्षित एडमिन लॉगिन जोड़ें।">This demo admin view has no password protection. Add secure admin authentication before real use.</p>
+      <div class="statrow"><div class="stat"><strong id="totalStudents">0</strong><span data-en="Student IDs seen" data-hi="स्टूडेंट आईडी">Student IDs seen</span></div><div class="stat"><strong id="todayCount">0</strong><span data-en="Attendance today" data-hi="आज की हाजिरी">Attendance today</span></div><div class="stat"><strong id="totalRecords">0</strong><span data-en="Attendance records" data-hi="कुल रिकॉर्ड">Attendance records</span></div></div>
+      <div class="actions"><button class="secondary" id="exportBtn" data-en="Export CSV" data-hi="CSV डाउनलोड करें">Export CSV</button><button class="danger" id="clearBtn" data-en="Clear demo data" data-hi="डेमो डेटा मिटाएँ">Clear demo data</button></div>
+    </div>
+    <div class="card span12"><h2 data-en="Attendance register" data-hi="हाजिरी रजिस्टर">Attendance register</h2><div class="tablewrap"><table><thead><tr><th data-en="Student ID" data-hi="स्टूडेंट आईडी">Student ID</th><th data-en="Name" data-hi="नाम">Name</th><th data-en="Date" data-hi="तारीख">Date</th><th data-en="Check in" data-hi="आने का समय">Check in</th><th data-en="Check out" data-hi="जाने का समय">Check out</th><th data-en="Location" data-hi="लोकेशन">Location</th></tr></thead><tbody id="adminRecords"><tr><td colspan="5" class="muted">No records yet.</td></tr></tbody></table></div></div>
+  </section>
+</main>
+<footer>RSLDC STUDENT PORTAL · <span data-en="Initial demo version" data-hi="शुरुआती डेमो संस्करण">Initial demo version</span></footer>
+<script>
+const $=id=>document.getElementById(id);
+let lang='en', current=null, photoUrl='', currentLocation=null;
+const read=()=>{try{return JSON.parse(localStorage.getItem('rsldc_demo_records')||'[]')}catch(e){return []}};
+const save=x=>localStorage.setItem('rsldc_demo_records',JSON.stringify(x));
+const t=(en,hi)=>lang==='hi'?hi:en;
+function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function clock(){return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}
+function getLocation(){
+  if(!navigator.geolocation){
+    $('locationStatus').textContent=t('Geolocation is not supported by this browser.','इस ब्राउज़र में लोकेशन सुविधा उपलब्ध नहीं है।');return;
+  }
+  $('locationStatus').textContent=t('Requesting location permission…','लोकेशन की अनुमति माँगी जा रही है…');
+  navigator.geolocation.getCurrentPosition(pos=>{
+    currentLocation={latitude:pos.coords.latitude,longitude:pos.coords.longitude,accuracy:Math.round(pos.coords.accuracy)};
+    $('locationStatus').innerHTML=t('Location found: ','लोकेशन मिल गई: ')+currentLocation.latitude.toFixed(5)+', '+currentLocation.longitude.toFixed(5)+' ('+t('accuracy about ','लगभग सटीकता ')+currentLocation.accuracy+' m) · <a target="_blank" rel="noopener" href="https://www.google.com/maps?q='+currentLocation.latitude+','+currentLocation.longitude+'">'+t('Open in Google Maps','Google Maps में खोलें')+'</a>';
+  },err=>{
+    const msg=err.code===1?t('Location permission denied. Allow location access in browser settings.','लोकेशन की अनुमति नहीं मिली। ब्राउज़र सेटिंग में अनुमति दें।'):err.code===2?t('Location unavailable. Try again outdoors or near a window.','लोकेशन उपलब्ध नहीं है। बाहर या खिड़की के पास फिर कोशिश करें।'):t('Location request timed out. Try again.','लोकेशन का समय समाप्त हुआ। फिर कोशिश करें।');
+    $('locationStatus').textContent=msg;
+  },{enableHighAccuracy:true,timeout:12000,maximumAge:0});
+}
+$('getLocation').onclick=getLocation;
+function setLang(next){lang=next;document.documentElement.lang=lang;document.querySelectorAll('[data-en]').forEach(el=>{el.textContent=el.dataset[lang]});$('langBtn').textContent=lang==='en'?'हिंदी':'English';$('studentName').placeholder=t('Enter your name','अपना नाम लिखें');$('studentId').placeholder=t('e.g. RSLDC001','जैसे RSLDC001');refresh()}
+$('langBtn').onclick=()=>setLang(lang==='en'?'hi':'en');
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));$('student').classList.toggle('hidden',b.dataset.tab!=='student');$('admin').classList.toggle('hidden',b.dataset.tab!=='admin');refresh()});
+function signIn(){const id=$('studentId').value.trim(),name=$('studentName').value.trim();if(!id||!name){alert(t('Enter both student ID and name.','स्टूडेंट आईडी और नाम दोनों भरें।'));return}current={id,name};$('studentArea').classList.remove('hidden');$('welcomeName').textContent=name;$('welcomeId').textContent=id;$('avatar').textContent=name.slice(0,1).toUpperCase();$('locationStatus').textContent=currentLocation?t('Location is ready.','लोकेशन तैयार है।'):t('Location has not been checked yet.','अभी लोकेशन नहीं ली गई है।');refresh()}
+$('signIn').onclick=signIn;
+$('signOut').onclick=()=>{current=null;$('studentArea').classList.add('hidden');$('studentId').value='';$('studentName').value='';photoUrl='';refresh()};
+function punch(type){if(!current){alert(t('Sign in first.','पहले लॉगिन करें।'));return}const date=today();let data=read();let r=data.find(x=>x.id===current.id&&x.date===date);if(!r){r={id:current.id,name:current.name,date,checkIn:'',checkOut:''};data.push(r)}r.name=current.name;if(type==='in'){if(r.checkIn){alert(t('Check in is already recorded for today.','आज आने की हाजिरी पहले से लगी है।'));return}r.checkIn=clock();r.checkInLocation=currentLocation}else{if(!r.checkIn){alert(t('Please mark check in first.','पहले आने की हाजिरी लगाएँ।'));return}if(r.checkOut){alert(t('Check out is already recorded for today.','आज जाने की हाजिरी पहले से लगी है।'));return}r.checkOut=clock();r.checkOutLocation=currentLocation}save(data);refresh()}
+$('checkIn').onclick=()=>punch('in');$('checkOut').onclick=()=>punch('out');
+$('photo').onchange=e=>{const f=e.target.files[0];if(!f)return;if(f.size>2*1024*1024){alert(t('Please choose an image under 2 MB.','2 MB से छोटी फोटो चुनें।'));return}const reader=new FileReader();reader.onload=()=>{photoUrl=reader.result;$('avatar').innerHTML='<img alt="Profile photo" src="'+photoUrl+'">'};reader.readAsDataURL(f)};
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function refresh(){const data=read();const mine=current?data.filter(r=>r.id===current.id).sort((a,b)=>b.date.localeCompare(a.date)):[];const tr=(r)=>`<tr><td>${esc(r.date)}</td><td>${esc(r.checkIn||'--')}</td><td>${esc(r.checkOut||'--')}</td><td>${r.checkOut?`<span class="pill">${t('Complete','पूर्ण')}</span>`:`<span class="pill out">${t('Open','अधूरी')}</span>`}</td></tr>`;
+$('myRecords').innerHTML=mine.length?mine.map(tr).join(''):`<tr><td colspan="4" class="muted">${t('No records yet.','अभी कोई रिकॉर्ड नहीं है।')}</td></tr>`;
+const todays=mine.find(r=>r.date===today());$('todayStatus').textContent=todays?(t('Today: ','आज: ')+(todays.checkIn?t('Check in ','आने का समय ')+todays.checkIn:t('Not checked in','आने की हाजिरी नहीं लगी'))+(todays.checkOut?' · '+t('Check out ','जाने का समय ')+todays.checkOut:'')):t('No attendance recorded today.','आज की हाजिरी अभी दर्ज नहीं है।');
+$('myDays').textContent=mine.length;$('myIn').textContent=todays?.checkIn||'--';$('myOut').textContent=todays?.checkOut||'--';
+$('totalStudents').textContent=new Set(data.map(r=>r.id)).size;$('todayCount').textContent=data.filter(r=>r.date===today()&&r.checkIn).length;$('totalRecords').textContent=data.length;
+$('adminRecords').innerHTML=data.length?data.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<tr><td>${esc(r.id)}</td><td>${esc(r.name)}</td><td>${esc(r.date)}</td><td>${esc(r.checkIn||'--')}</td><td>${esc(r.checkOut||'--')}</td><td>${r.checkInLocation?'<a target="_blank" rel="noopener" href="https://www.google.com/maps?q='+r.checkInLocation.latitude+','+r.checkInLocation.longitude+'">'+t('Check in map','आने की लोकेशन')+'</a>':''}${r.checkOutLocation?' · <a target="_blank" rel="noopener" href="https://www.google.com/maps?q='+r.checkOutLocation.latitude+','+r.checkOutLocation.longitude+'">'+t('Check out map','जाने की लोकेशन')+'</a>':''}</td></tr>`).join(''):`<tr><td colspan="6" class="muted">${t('No records yet.','अभी कोई रिकॉर्ड नहीं है।')}</td></tr>`;
+}
+$('exportBtn').onclick=()=>{const data=read();const rows=[['Student ID','Name','Date','Check in','Check out'],...data.map(r=>[r.id,r.name,r.date,r.checkIn,r.checkOut])];const csv=rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));a.download='rsldc-attendance-demo.csv';a.click();URL.revokeObjectURL(a.href)};
+$('clearBtn').onclick=()=>{if(confirm(t('Delete all demo records from this browser?','इस ब्राउज़र से सभी डेमो रिकॉर्ड मिटाएँ?'))){localStorage.removeItem('rsldc_demo_records');refresh()}};
+setLang('en');
+</script>
+</body>
+</html>
